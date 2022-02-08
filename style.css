@@ -1,0 +1,142 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-image: url(https://circepalace.files.wordpress.com/2016/01/blood_png6119.png);
+	background-size: 1920px auto;
+	background-position: center top;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+
+h1 {
+	font-family: 'Creepster';
+	padding: 2vmin;
+	text-align: left;
+	font-size: 10vmin;
+	color: #000;
+	text-shadow: 0 0 3px rgba(0,0,0,.3);
+	margin: 10px 0;
+}
+
+.death {
+	padding: 2vmin;
+	min-width: 320px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.death > * {
+	flex: 1 1 250px;
+	margin: 1vmin;
+	max-height: 30vmin;
+	display: flex;
+	overflow: hidden;
+	align-items: center;
+	justify-content: center;
+	
+}
+
+.death :nth-child(3n+3) {
+	flex-grow: 4;
+}
+
+@media screen and (min-width: 640px) {
+	.death :nth-child(3n+5) {
+		flex-grow: 2;
+		flex-basis: 20%;
+	}
+	.death :nth-child(3n+4) {
+		flex-grow: 2;
+		flex-basis: 350px;
+	}
+	.death :nth-last-child(1),
+	.death :nth-last-child(2) {
+		flex-basis: 40%;
+	}
+}
+
+@supports (display: grid) and ((-o-object-fit: cover) or (object-fit: cover)) {
+	.death {
+		display: grid;
+		grid-auto-flow: dense;
+		grid-template-columns: repeat(auto-fit,minmax(calc(5rem + 10vmax), -webkit-max-content));
+		grid-template-columns: repeat(auto-fit,minmax(calc(5rem + 10vmax), max-content));
+		grid-gap: 1vmin;
+	}
+	
+	.death > * {
+		display: initial;
+		flex: 1 1 300px;
+		margin: initial;
+		max-height: initial;
+	}
+	
+	.death img {
+		width: 100%;
+		height: 100%;
+		display: block;
+		-o-object-fit: cover;
+		   object-fit: cover;
+	}
+	
+	.death :nth-child(2n+2) {
+		grid-row-end: span 1;
+	}
+
+	@media screen and (min-width: 640px) {
+		.death :first-child {
+			grid-row-start: span 3;
+			grid-column-start: span 3;	
+		}
+		.death :nth-child(2n+3) {
+			grid-row-start: span 3;
+		}
+		.death :nth-child(6n+3) {
+			grid-row-start: span 2;
+		}
+	}
+
+	@media screen and (min-width: 960px) {
+		.death :first-child {
+			grid-row-start: span 2;
+			grid-column-start: span 2;	
+		}
+		.death :nth-child(8n+9) {
+			grid-column-start: span 1;
+			grid-row-start: span 3;
+		}
+		.death :nth-child(2n+3) {
+			grid-row-start: span 2;
+		}
+	}
+}
+
+
+/* some effects */
+.death > * {
+	filter: saturate(0);
+	transition: 5s filter 1s;
+}
+
+.death > :hover {
+	filter: saturate(1);
+	transition: filter .25s;
+}
+
+
+/* for demo */
+.death.demo > * {
+	counter-increment: number;
+	position: relative;
+}
+
+.death.demo > *:after {
+	content: counter(number);
+	color: #fff;
+	position: absolute;
+	top: 5px;
+	left: 5px;
+}
